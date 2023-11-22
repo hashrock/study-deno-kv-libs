@@ -1,0 +1,10 @@
+{
+  "version": "3",
+  "remote": {
+    "https://deno.land/std@0.207.0/encoding/_util.ts": "f368920189c4fe6592ab2e93bd7ded8f3065b84f95cd3e036a4a10a75649dcba",
+    "https://deno.land/std@0.207.0/encoding/hex.ts": "a384101d02cd87036c708f540825feb5b073c8527a00d635e48b2e69c992a5f9",
+    "https://raw.githubusercontent.com/skymethod/kv-connect-kit/9871a9f4e3014a8307575eb8e439170d0e0a2446/src/bytes.ts": "9c583fcf1f9b5c7dd56046aabba27c405b29c332533a3f54cd1cd3d3970d81c5",
+    "https://raw.githubusercontent.com/skymethod/kv-connect-kit/9871a9f4e3014a8307575eb8e439170d0e0a2446/src/kv_key.ts": "f6a432904083595b9f3c1820e40e6c302152f9aabcd540f9138537547413f522",
+    "https://raw.githubusercontent.com/skymethod/kv-connect-kit/9871a9f4e3014a8307575eb8e439170d0e0a2446/src/kv_types.ts": "19818e7804543f4b28aafdb1b122b06ffcba1980167f96d5a296d5ab1855d941"
+  }
+}
