@@ -5,8 +5,8 @@ import { decodeBinary as decodeAtomicWriteOutput } from './proto/messages/com/de
 import { AtomicWrite, AtomicWriteOutput, ReadRange, SnapshotRead, SnapshotReadOutput } from './proto/messages/com/deno/kv/datapath/index.ts';
 import { packKey } from "https://raw.githubusercontent.com/skymethod/kv-connect-kit/9871a9f4e3014a8307575eb8e439170d0e0a2446/src/kv_key.ts"
 
-const start = packKey(["foo"])
-const end = packKey(["bar"])
+const start = packKey(["a"])
+const end = packKey(["z"])
 
 const range: ReadRange = {
   start,
@@ -31,10 +31,14 @@ const res = await fetch("http://0.0.0.0:4512/v2/snapshot_read", {
     "Authorization": "Bearer a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
     "Content-Type": "application/x-protobuf",
     "x-denokv-version": "2",
-    "x-denokv-database-id": "a1b2c3d4-e5f6-7g8h-9i1j-2k3l4m5n6o7p",
+    "x-denokv-database-id": "00000000-0000-0000-0000-000000000000",
   },
   body: protobuf,
 });
 
 console.log(res.status)
 console.log(res.statusText)
+
+const output = await res.arrayBuffer()
+const decoded = decodeSnapshotReadOutput(new Uint8Array(output))
+console.log(decoded)
