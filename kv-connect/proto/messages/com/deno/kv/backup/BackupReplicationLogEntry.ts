@@ -1,27 +1,20 @@
 // @ts-nocheck
 import {
-  Type as BackupKvMutationKind,
   name2num,
   num2name,
+  Type as BackupKvMutationKind,
 } from "./BackupKvMutationKind.ts";
 import {
-  tsValueToJsonValueFns,
   jsonValueToTsValueFns,
+  tsValueToJsonValueFns,
 } from "../../../../../runtime/json/scalar.ts";
-import {
-  WireMessage,
-  WireType,
-} from "../../../../../runtime/wire/index.ts";
-import {
-  default as serialize,
-} from "../../../../../runtime/wire/serialize.ts";
+import { WireMessage, WireType } from "../../../../../runtime/wire/index.ts";
+import { default as serialize } from "../../../../../runtime/wire/serialize.ts";
 import {
   tsValueToWireValueFns,
   wireValueToTsValueFns,
 } from "../../../../../runtime/wire/scalar.ts";
-import {
-  default as Long,
-} from "../../../../../runtime/Long.ts";
+import { default as Long } from "../../../../../runtime/Long.ts";
 import {
   default as deserialize,
 } from "../../../../../runtime/wire/deserialize.ts";
@@ -34,7 +27,7 @@ export declare namespace $.com.deno.kv.backup {
     value: Uint8Array;
     valueEncoding: number;
     expireAtMs: string;
-  }
+  };
 }
 
 export type Type = $.com.deno.kv.backup.BackupReplicationLogEntry;
@@ -50,36 +43,70 @@ export function getDefaultValue(): $.com.deno.kv.backup.BackupReplicationLogEntr
   };
 }
 
-export function createValue(partialValue: Partial<$.com.deno.kv.backup.BackupReplicationLogEntry>): $.com.deno.kv.backup.BackupReplicationLogEntry {
+export function createValue(
+  partialValue: Partial<$.com.deno.kv.backup.BackupReplicationLogEntry>,
+): $.com.deno.kv.backup.BackupReplicationLogEntry {
   return {
     ...getDefaultValue(),
     ...partialValue,
   };
 }
 
-export function encodeJson(value: $.com.deno.kv.backup.BackupReplicationLogEntry): unknown {
+export function encodeJson(
+  value: $.com.deno.kv.backup.BackupReplicationLogEntry,
+): unknown {
   const result: any = {};
-  if (value.versionstamp !== undefined) result.versionstamp = tsValueToJsonValueFns.bytes(value.versionstamp);
-  if (value.kind !== undefined) result.kind = tsValueToJsonValueFns.enum(value.kind);
-  if (value.key !== undefined) result.key = tsValueToJsonValueFns.bytes(value.key);
-  if (value.value !== undefined) result.value = tsValueToJsonValueFns.bytes(value.value);
-  if (value.valueEncoding !== undefined) result.valueEncoding = tsValueToJsonValueFns.int32(value.valueEncoding);
-  if (value.expireAtMs !== undefined) result.expireAtMs = tsValueToJsonValueFns.uint64(value.expireAtMs);
+  if (value.versionstamp !== undefined) {
+    result.versionstamp = tsValueToJsonValueFns.bytes(value.versionstamp);
+  }
+  if (value.kind !== undefined) {
+    result.kind = tsValueToJsonValueFns.enum(value.kind);
+  }
+  if (value.key !== undefined) {
+    result.key = tsValueToJsonValueFns.bytes(value.key);
+  }
+  if (value.value !== undefined) {
+    result.value = tsValueToJsonValueFns.bytes(value.value);
+  }
+  if (value.valueEncoding !== undefined) {
+    result.valueEncoding = tsValueToJsonValueFns.int32(value.valueEncoding);
+  }
+  if (value.expireAtMs !== undefined) {
+    result.expireAtMs = tsValueToJsonValueFns.uint64(value.expireAtMs);
+  }
   return result;
 }
 
-export function decodeJson(value: any): $.com.deno.kv.backup.BackupReplicationLogEntry {
+export function decodeJson(
+  value: any,
+): $.com.deno.kv.backup.BackupReplicationLogEntry {
   const result = getDefaultValue();
-  if (value.versionstamp !== undefined) result.versionstamp = jsonValueToTsValueFns.bytes(value.versionstamp);
-  if (value.kind !== undefined) result.kind = jsonValueToTsValueFns.enum(value.kind) as BackupKvMutationKind;
-  if (value.key !== undefined) result.key = jsonValueToTsValueFns.bytes(value.key);
-  if (value.value !== undefined) result.value = jsonValueToTsValueFns.bytes(value.value);
-  if (value.valueEncoding !== undefined) result.valueEncoding = jsonValueToTsValueFns.int32(value.valueEncoding);
-  if (value.expireAtMs !== undefined) result.expireAtMs = jsonValueToTsValueFns.uint64(value.expireAtMs);
+  if (value.versionstamp !== undefined) {
+    result.versionstamp = jsonValueToTsValueFns.bytes(value.versionstamp);
+  }
+  if (value.kind !== undefined) {
+    result.kind = jsonValueToTsValueFns.enum(
+      value.kind,
+    ) as BackupKvMutationKind;
+  }
+  if (value.key !== undefined) {
+    result.key = jsonValueToTsValueFns.bytes(value.key);
+  }
+  if (value.value !== undefined) {
+    result.value = jsonValueToTsValueFns.bytes(value.value);
+  }
+  if (value.valueEncoding !== undefined) {
+    result.valueEncoding = jsonValueToTsValueFns.int32(value.valueEncoding);
+  }
+  if (value.expireAtMs !== undefined) {
+    result.expireAtMs = jsonValueToTsValueFns.uint64(value.expireAtMs);
+  }
   return result;
 }
 
-export function encodeBinary(value: $.com.deno.kv.backup.BackupReplicationLogEntry): Uint8Array {
+export function encodeBinary(
+  value: $.com.deno.kv.backup.BackupReplicationLogEntry,
+): Uint8Array {
   const result: WireMessage = [];
   if (value.versionstamp !== undefined) {
     const tsValue = value.versionstamp;
@@ -90,7 +117,10 @@ export function encodeBinary(value: $.com.deno.kv.backup.BackupReplicationLogEnt
   if (value.kind !== undefined) {
     const tsValue = value.kind;
     result.push(
-      [2, { type: WireType.Varint as const, value: new Long(name2num[tsValue as keyof typeof name2num]) }],
+      [2, {
+        type: WireType.Varint as const,
+        value: new Long(name2num[tsValue as keyof typeof name2num]),
+      }],
     );
   }
   if (value.key !== undefined) {
@@ -120,7 +150,9 @@ export function encodeBinary(value: $.com.deno.kv.backup.BackupReplicationLogEnt
   return serialize(result);
 }
 
-export function decodeBinary(binary: Uint8Array): $.com.deno.kv.backup.BackupReplicationLogEntry {
+export function decodeBinary(
+  binary: Uint8Array,
+): $.com.deno.kv.backup.BackupReplicationLogEntry {
   const result = getDefaultValue();
   const wireMessage = deserialize(binary);
   const wireFields = new Map(wireMessage);
@@ -134,7 +166,9 @@ export function decodeBinary(binary: Uint8Array): $.com.deno.kv.backup.BackupRep
   field: {
     const wireValue = wireFields.get(2);
     if (wireValue === undefined) break field;
-    const value = wireValue.type === WireType.Varint ? num2name[wireValue.value[0] as keyof typeof num2name] : undefined;
+    const value = wireValue.type === WireType.Varint
+      ? num2name[wireValue.value[0] as keyof typeof num2name]
+      : undefined;
     if (value === undefined) break field;
     result.kind = value;
   }

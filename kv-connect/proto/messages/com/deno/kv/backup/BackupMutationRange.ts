@@ -1,22 +1,17 @@
 // @ts-nocheck
 import {
-  Type as BackupReplicationLogEntry,
-  encodeJson as encodeJson_1,
+  decodeBinary as decodeBinary_1,
   decodeJson as decodeJson_1,
   encodeBinary as encodeBinary_1,
-  decodeBinary as decodeBinary_1,
+  encodeJson as encodeJson_1,
+  Type as BackupReplicationLogEntry,
 } from "./BackupReplicationLogEntry.ts";
 import {
-  tsValueToJsonValueFns,
   jsonValueToTsValueFns,
+  tsValueToJsonValueFns,
 } from "../../../../../runtime/json/scalar.ts";
-import {
-  WireMessage,
-  WireType,
-} from "../../../../../runtime/wire/index.ts";
-import {
-  default as serialize,
-} from "../../../../../runtime/wire/serialize.ts";
+import { WireMessage, WireType } from "../../../../../runtime/wire/index.ts";
+import { default as serialize } from "../../../../../runtime/wire/serialize.ts";
 import {
   tsValueToWireValueFns,
   wireValueToTsValueFns,
@@ -29,7 +24,7 @@ export declare namespace $.com.deno.kv.backup {
   export type BackupMutationRange = {
     entries: BackupReplicationLogEntry[];
     timestampMs: string;
-  }
+  };
 }
 
 export type Type = $.com.deno.kv.backup.BackupMutationRange;
@@ -41,32 +36,48 @@ export function getDefaultValue(): $.com.deno.kv.backup.BackupMutationRange {
   };
 }
 
-export function createValue(partialValue: Partial<$.com.deno.kv.backup.BackupMutationRange>): $.com.deno.kv.backup.BackupMutationRange {
+export function createValue(
+  partialValue: Partial<$.com.deno.kv.backup.BackupMutationRange>,
+): $.com.deno.kv.backup.BackupMutationRange {
   return {
     ...getDefaultValue(),
     ...partialValue,
   };
 }
 
-export function encodeJson(value: $.com.deno.kv.backup.BackupMutationRange): unknown {
+export function encodeJson(
+  value: $.com.deno.kv.backup.BackupMutationRange,
+): unknown {
   const result: any = {};
-  result.entries = value.entries.map(value => encodeJson_1(value));
-  if (value.timestampMs !== undefined) result.timestampMs = tsValueToJsonValueFns.uint64(value.timestampMs);
+  result.entries = value.entries.map((value) => encodeJson_1(value));
+  if (value.timestampMs !== undefined) {
+    result.timestampMs = tsValueToJsonValueFns.uint64(value.timestampMs);
+  }
   return result;
 }
 
-export function decodeJson(value: any): $.com.deno.kv.backup.BackupMutationRange {
+export function decodeJson(
+  value: any,
+): $.com.deno.kv.backup.BackupMutationRange {
   const result = getDefaultValue();
-  result.entries = value.entries?.map((value: any) => decodeJson_1(value)) ?? [];
-  if (value.timestampMs !== undefined) result.timestampMs = jsonValueToTsValueFns.uint64(value.timestampMs);
+  result.entries = value.entries?.map((value: any) => decodeJson_1(value)) ??
+    [];
+  if (value.timestampMs !== undefined) {
+    result.timestampMs = jsonValueToTsValueFns.uint64(value.timestampMs);
+  }
   return result;
 }
 
-export function encodeBinary(value: $.com.deno.kv.backup.BackupMutationRange): Uint8Array {
+export function encodeBinary(
+  value: $.com.deno.kv.backup.BackupMutationRange,
+): Uint8Array {
   const result: WireMessage = [];
   for (const tsValue of value.entries) {
     result.push(
-      [1, { type: WireType.LengthDelimited as const, value: encodeBinary_1(tsValue) }],
+      [1, {
+        type: WireType.LengthDelimited as const,
+        value: encodeBinary_1(tsValue),
+      }],
     );
   }
   if (value.timestampMs !== undefined) {
@@ -78,13 +89,20 @@ export function encodeBinary(value: $.com.deno.kv.backup.BackupMutationRange): U
   return serialize(result);
 }
 
-export function decodeBinary(binary: Uint8Array): $.com.deno.kv.backup.BackupMutationRange {
+export function decodeBinary(
+  binary: Uint8Array,
+): $.com.deno.kv.backup.BackupMutationRange {
   const result = getDefaultValue();
   const wireMessage = deserialize(binary);
   const wireFields = new Map(wireMessage);
   collection: {
-    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 1).map(([, wireValue]) => wireValue);
-    const value = wireValues.map((wireValue) => wireValue.type === WireType.LengthDelimited ? decodeBinary_1(wireValue.value) : undefined).filter(x => x !== undefined);
+    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 1)
+      .map(([, wireValue]) => wireValue);
+    const value = wireValues.map((wireValue) =>
+      wireValue.type === WireType.LengthDelimited
+        ? decodeBinary_1(wireValue.value)
+        : undefined
+    ).filter((x) => x !== undefined);
     if (!value.length) break collection;
     result.entries = value as any;
   }

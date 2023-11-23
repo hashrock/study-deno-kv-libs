@@ -1,4 +1,4 @@
-import { encode as base64Encode, decode as base64Decode } from "../base64.ts";
+import { decode as base64Decode, encode as base64Encode } from "../base64.ts";
 
 type TsValueToJsonValue<T> = (tsValue: T) => unknown;
 type JsonValueToTsValue<T> = (jsonValue: any) => T;
@@ -41,7 +41,6 @@ interface JsonValueToTsValueFns {
   enum: JsonValueToTsValue<string>;
 }
 
-
 export const tsValueToJsonValueFns: TsValueToJsonValueFns = {
   int32: (tsValue) => tsValue,
   int64: (tsValue) => tsValue,
@@ -60,7 +59,6 @@ export const tsValueToJsonValueFns: TsValueToJsonValueFns = {
   bytes: (tsValue) => base64Encode(tsValue),
   enum: (tsValue) => tsValue,
 };
-
 
 export const jsonValueToTsValueFns: JsonValueToTsValueFns = {
   int32: (tsValue) => tsValue,

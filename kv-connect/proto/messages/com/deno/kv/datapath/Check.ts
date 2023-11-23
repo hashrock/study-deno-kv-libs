@@ -1,14 +1,10 @@
 // @ts-nocheck
 import {
-  tsValueToJsonValueFns,
   jsonValueToTsValueFns,
+  tsValueToJsonValueFns,
 } from "../../../../../runtime/json/scalar.ts";
-import {
-  WireMessage,
-} from "../../../../../runtime/wire/index.ts";
-import {
-  default as serialize,
-} from "../../../../../runtime/wire/serialize.ts";
+import { WireMessage } from "../../../../../runtime/wire/index.ts";
+import { default as serialize } from "../../../../../runtime/wire/serialize.ts";
 import {
   tsValueToWireValueFns,
   wireValueToTsValueFns,
@@ -21,7 +17,7 @@ export declare namespace $.com.deno.kv.datapath {
   export type Check = {
     key: Uint8Array;
     versionstamp: Uint8Array;
-  }
+  };
 }
 
 export type Type = $.com.deno.kv.datapath.Check;
@@ -33,7 +29,9 @@ export function getDefaultValue(): $.com.deno.kv.datapath.Check {
   };
 }
 
-export function createValue(partialValue: Partial<$.com.deno.kv.datapath.Check>): $.com.deno.kv.datapath.Check {
+export function createValue(
+  partialValue: Partial<$.com.deno.kv.datapath.Check>,
+): $.com.deno.kv.datapath.Check {
   return {
     ...getDefaultValue(),
     ...partialValue,
@@ -42,15 +40,23 @@ export function createValue(partialValue: Partial<$.com.deno.kv.datapath.Check>)
 
 export function encodeJson(value: $.com.deno.kv.datapath.Check): unknown {
   const result: any = {};
-  if (value.key !== undefined) result.key = tsValueToJsonValueFns.bytes(value.key);
-  if (value.versionstamp !== undefined) result.versionstamp = tsValueToJsonValueFns.bytes(value.versionstamp);
+  if (value.key !== undefined) {
+    result.key = tsValueToJsonValueFns.bytes(value.key);
+  }
+  if (value.versionstamp !== undefined) {
+    result.versionstamp = tsValueToJsonValueFns.bytes(value.versionstamp);
+  }
   return result;
 }
 
 export function decodeJson(value: any): $.com.deno.kv.datapath.Check {
   const result = getDefaultValue();
-  if (value.key !== undefined) result.key = jsonValueToTsValueFns.bytes(value.key);
-  if (value.versionstamp !== undefined) result.versionstamp = jsonValueToTsValueFns.bytes(value.versionstamp);
+  if (value.key !== undefined) {
+    result.key = jsonValueToTsValueFns.bytes(value.key);
+  }
+  if (value.versionstamp !== undefined) {
+    result.versionstamp = jsonValueToTsValueFns.bytes(value.versionstamp);
+  }
   return result;
 }
 

@@ -1,6 +1,4 @@
 // @ts-nocheck
 import * as messages from "./messages/index.ts";
 
-export type {
-  messages,
-};
+export type { messages };

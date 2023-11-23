@@ -80,13 +80,13 @@ const varintFieldToTsValueFns = Object.fromEntries(
 
 type TsValueToVarintFieldFns = typeof tsValueToVarintFieldFns;
 const tsValueToVarintFieldFns = Object.fromEntries(
-  Object.entries(encodeVarintFns).map(([type, fn]) => ([
+  Object.entries(encodeVarintFns).map(([type, fn]) => [
     type,
     <T extends never>(tsValue: T) => ({
       type: WireType.Varint,
       value: fn(tsValue),
     }),
-  ])),
+  ]),
 ) as {
   [type in keyof DecodeVarintFns]: TsValueToWireValue<
     ReturnType<DecodeVarintFns[type]>

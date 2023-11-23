@@ -1,3 +1,6 @@
+const date = new Date();
+const tags = new Set(["a", "b", "c"]);
+
 const item1 = {
   "_id": "6526aaf85baea6a1687e03ce",
   "index": 0,
@@ -18,6 +21,12 @@ const item1 = {
   "registered": "2018-07-28T05:51:22 -09:00",
   "latitude": -19.347479,
   "longitude": -105.082764,
+  createdAt: date,
+  tags,
+  "user": {
+    name: "John",
+    birthday: date,
+  },
 };
 
 const kv = await Deno.openKv();

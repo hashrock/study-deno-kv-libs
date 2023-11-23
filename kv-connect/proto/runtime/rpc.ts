@@ -55,9 +55,9 @@ export interface MethodDescriptor<
 }
 
 type ThenArg<T> = T extends Promise<infer U> ? U : T;
-export type RpcReturnType<TRes, TResArgs extends any[]> = (
-  Promise<TResArgs extends [] ? ThenArg<TRes> : [ThenArg<TRes>, ...TResArgs]>
-);
+export type RpcReturnType<TRes, TResArgs extends any[]> = Promise<
+  TResArgs extends [] ? ThenArg<TRes> : [ThenArg<TRes>, ...TResArgs]
+>;
 
 export interface MethodImpl<
   TReq,

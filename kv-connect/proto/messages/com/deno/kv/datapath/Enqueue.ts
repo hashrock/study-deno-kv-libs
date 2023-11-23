@@ -1,18 +1,14 @@
 // @ts-nocheck
 import {
-  tsValueToJsonValueFns,
   jsonValueToTsValueFns,
+  tsValueToJsonValueFns,
 } from "../../../../../runtime/json/scalar.ts";
-import {
-  WireMessage,
-} from "../../../../../runtime/wire/index.ts";
-import {
-  default as serialize,
-} from "../../../../../runtime/wire/serialize.ts";
+import { WireMessage } from "../../../../../runtime/wire/index.ts";
+import { default as serialize } from "../../../../../runtime/wire/serialize.ts";
 import {
   tsValueToWireValueFns,
-  wireValueToTsValueFns,
   unpackFns,
+  wireValueToTsValueFns,
 } from "../../../../../runtime/wire/scalar.ts";
 import {
   default as deserialize,
@@ -24,7 +20,7 @@ export declare namespace $.com.deno.kv.datapath {
     deadlineMs: string;
     kvKeysIfUndelivered: Uint8Array[];
     backoffSchedule: number[];
-  }
+  };
 }
 
 export type Type = $.com.deno.kv.datapath.Enqueue;
@@ -38,7 +34,9 @@ export function getDefaultValue(): $.com.deno.kv.datapath.Enqueue {
   };
 }
 
-export function createValue(partialValue: Partial<$.com.deno.kv.datapath.Enqueue>): $.com.deno.kv.datapath.Enqueue {
+export function createValue(
+  partialValue: Partial<$.com.deno.kv.datapath.Enqueue>,
+): $.com.deno.kv.datapath.Enqueue {
   return {
     ...getDefaultValue(),
     ...partialValue,
@@ -47,23 +45,43 @@ export function createValue(partialValue: Partial<$.com.deno.kv.datapath.Enqueue
 
 export function encodeJson(value: $.com.deno.kv.datapath.Enqueue): unknown {
   const result: any = {};
-  if (value.payload !== undefined) result.payload = tsValueToJsonValueFns.bytes(value.payload);
-  if (value.deadlineMs !== undefined) result.deadlineMs = tsValueToJsonValueFns.int64(value.deadlineMs);
-  result.kvKeysIfUndelivered = value.kvKeysIfUndelivered.map(value => tsValueToJsonValueFns.bytes(value));
-  result.backoffSchedule = value.backoffSchedule.map(value => tsValueToJsonValueFns.uint32(value));
+  if (value.payload !== undefined) {
+    result.payload = tsValueToJsonValueFns.bytes(value.payload);
+  }
+  if (value.deadlineMs !== undefined) {
+    result.deadlineMs = tsValueToJsonValueFns.int64(value.deadlineMs);
+  }
+  result.kvKeysIfUndelivered = value.kvKeysIfUndelivered.map((value) =>
+    tsValueToJsonValueFns.bytes(value)
+  );
+  result.backoffSchedule = value.backoffSchedule.map((value) =>
+    tsValueToJsonValueFns.uint32(value)
+  );
   return result;
 }
 
 export function decodeJson(value: any): $.com.deno.kv.datapath.Enqueue {
   const result = getDefaultValue();
-  if (value.payload !== undefined) result.payload = jsonValueToTsValueFns.bytes(value.payload);
-  if (value.deadlineMs !== undefined) result.deadlineMs = jsonValueToTsValueFns.int64(value.deadlineMs);
-  result.kvKeysIfUndelivered = value.kvKeysIfUndelivered?.map((value: any) => jsonValueToTsValueFns.bytes(value)) ?? [];
-  result.backoffSchedule = value.backoffSchedule?.map((value: any) => jsonValueToTsValueFns.uint32(value)) ?? [];
+  if (value.payload !== undefined) {
+    result.payload = jsonValueToTsValueFns.bytes(value.payload);
+  }
+  if (value.deadlineMs !== undefined) {
+    result.deadlineMs = jsonValueToTsValueFns.int64(value.deadlineMs);
+  }
+  result.kvKeysIfUndelivered =
+    value.kvKeysIfUndelivered?.map((value: any) =>
+      jsonValueToTsValueFns.bytes(value)
+    ) ?? [];
+  result.backoffSchedule =
+    value.backoffSchedule?.map((value: any) =>
+      jsonValueToTsValueFns.uint32(value)
+    ) ?? [];
   return result;
 }
 
-export function encodeBinary(value: $.com.deno.kv.datapath.Enqueue): Uint8Array {
+export function encodeBinary(
+  value: $.com.deno.kv.datapath.Enqueue,
+): Uint8Array {
   const result: WireMessage = [];
   if (value.payload !== undefined) {
     const tsValue = value.payload;
@@ -90,7 +108,9 @@ export function encodeBinary(value: $.com.deno.kv.datapath.Enqueue): Uint8Array 
   return serialize(result);
 }
 
-export function decodeBinary(binary: Uint8Array): $.com.deno.kv.datapath.Enqueue {
+export function decodeBinary(
+  binary: Uint8Array,
+): $.com.deno.kv.datapath.Enqueue {
   const result = getDefaultValue();
   const wireMessage = deserialize(binary);
   const wireFields = new Map(wireMessage);
@@ -109,13 +129,17 @@ export function decodeBinary(binary: Uint8Array): $.com.deno.kv.datapath.Enqueue
     result.deadlineMs = value;
   }
   collection: {
-    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 3).map(([, wireValue]) => wireValue);
-    const value = wireValues.map((wireValue) => wireValueToTsValueFns.bytes(wireValue)).filter(x => x !== undefined);
+    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 3)
+      .map(([, wireValue]) => wireValue);
+    const value = wireValues.map((wireValue) =>
+      wireValueToTsValueFns.bytes(wireValue)
+    ).filter((x) => x !== undefined);
     if (!value.length) break collection;
     result.kvKeysIfUndelivered = value as any;
   }
   collection: {
-    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 4).map(([, wireValue]) => wireValue);
+    const wireValues = wireMessage.filter(([fieldNumber]) => fieldNumber === 4)
+      .map(([, wireValue]) => wireValue);
     const value = Array.from(unpackFns.uint32(wireValues));
     if (!value.length) break collection;
     result.backoffSchedule = value as any;
